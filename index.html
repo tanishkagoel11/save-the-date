@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Arpit &amp; Tanishka · Save the date</title>
+<meta name="description" content="3 & 4 March 2027, Delhi. Answer a few questions to unlock your guest pass.">
+<meta name="theme-color" content="#f6a2b6">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Arpit & Tanishka · Save the date">
+<meta property="og:description" content="3 & 4 March 2027, Delhi. Answer a few questions to unlock your guest pass.">
+<meta property="og:image" content="https://YOUR-USERNAME.github.io/save-the-date/preview.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 28 C10 22 2 17 4 10 C6 4 13 4 16 10 C19 4 26 4 28 10 C30 17 22 22 16 28Z' fill='%23d9434f'/%3E%3C/svg%3E">
+<style>html,body{margin:0} [hidden]{display:none!important} img{max-width:100%} :root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@400;500&display=swap">
+<style>
+/* Layout: names on top, wavy-bordered paper quiz card in the middle, two ink-drawn dancers in the screen corners.
+   Palette: only pink, peach and beige. Two fonts: Cormorant Garamond (display + text), Jost (small labels).
+   Finale: jharokha arch save-the-date with the Yosemite proposal scene and a tear-off guest stub.
+   Deliberately single (light) theme: it's stationery. */
+:root{
+  --bg:#f6a2b6; --paper:#fffaf6; --ink:#3a3330; --muted:#8a7b73;
+  --pink:#e8a0ae; --pink-soft:#f8dde1; --pink-deep:#c45f72;
+  --peach:#f2bf9f; --peach-soft:#fbe7da; --tan:#d2a88d;
+  --serif:"Cormorant Garamond","Garamond","Georgia",serif;
+  --sans:"Jost","Futura","Avenir Next",system-ui,sans-serif;
+  color-scheme:light;
+}
+html,body{min-height:100%}
+body{ transition:background .4s;
+  color:var(--ink); font-family:var(--serif); font-size:18px; line-height:1.45; font-variant-numeric:lining-nums;
+  background:var(--bg);
+}
+.page{position:relative; min-height:100vh; padding-inline:16px; padding-block:60px 56px; display:flex; flex-direction:column; align-items:center}
+#doodles{position:fixed; inset:0; pointer-events:none; z-index:0}
+#doodles svg{position:absolute; width:clamp(58px,6.2vw,88px); height:auto; overflow:visible; opacity:.95}
+@media (max-width:899px){ #doodles svg{width:52px; opacity:.85} #doodles svg:not(.m){display:none} #doodles svg.m{top:58px!important; width:42px} #doodles{position:absolute} }
+body.final{background:#f3c9d2}
+body.final #doodles{display:none}
+header{position:relative; z-index:1}
+#toran{position:absolute; top:0; left:0; width:100%; height:54px; pointer-events:none}
+
+header{text-align:center; display:flex; flex-direction:column; align-items:center; gap:2px; margin-top:16px}
+.lotus{width:44px; height:28px}
+.names{font-family:var(--serif); font-weight:400; font-size:clamp(2.4rem,8.5vw,3.6rem); line-height:1.05; letter-spacing:.02em; margin:6px 0 0; text-wrap:balance}
+.names em{font-style:italic; color:#b3263a; font-weight:400}
+.sub{font-family:var(--sans); font-size:.7rem; letter-spacing:.24em; text-transform:uppercase; color:#7b3446; margin:10px 0 0}
+
+#stage{position:relative; z-index:2; width:100%; max-width:500px; margin-top:26px}
+.card{position:relative; padding:44px 38px 40px; min-height:360px}
+.card > .wave{position:absolute; inset:0; width:100%; height:100%; pointer-events:none; overflow:visible}
+.card > .inner{position:relative}
+.top{display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:14px}
+.qnum{font-family:var(--sans); font-size:.74rem; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); margin:0}
+.dots{display:flex; gap:7px}
+.dots i{width:10px; height:10px; border-radius:50%; border:1.3px solid var(--ink); display:block}
+.dots i.on:nth-child(odd){background:var(--pink)} .dots i.on:nth-child(even){background:var(--peach)}
+.q{font-weight:600; font-size:clamp(1.65rem,6vw,2.05rem); line-height:1.15; margin:0 0 22px; text-wrap:balance}
+.opts{display:grid; gap:10px}
+.opt{
+  font-family:var(--serif); font-size:1.15rem; font-weight:500; text-align:left; color:var(--ink); cursor:pointer;
+  background:transparent; border:1.3px solid var(--ink); border-radius:999px; padding:10px 20px;
+  transition:background .2s, transform .15s;
+}
+.opt:hover{transform:translateX(3px); background:#f4ebe3}
+.opt:focus-visible{outline:2px dashed var(--tan); outline-offset:3px}
+.opt s{color:var(--muted); text-decoration-thickness:1.5px}
+.opt.right{background:#e3f1e5; border-color:#6fa57d}
+.opt.right::after{content:" ✓"; font-family:var(--sans); color:#3f7d50; font-weight:500}
+
+/* Wrong answer */
+.revoked{position:absolute; inset:20px; background:var(--paper); border-radius:24px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:20px; padding:20px; z-index:2}
+.stamp{
+  font-family:var(--sans); color:var(--pink-deep); text-transform:uppercase; text-align:center;
+  border:2px solid var(--pink-deep); outline:1px solid var(--pink-deep); outline-offset:4px; border-radius:6px; background:#fdf0f1;
+  padding:10px 22px 12px; transform:rotate(-6deg); animation:thunk .3s cubic-bezier(.2,1.5,.4,1);
+}
+.stamp small{display:block; font-size:.78rem; font-weight:500; letter-spacing:.3em}
+.stamp b{display:block; font-weight:500; font-size:2rem; letter-spacing:.16em; line-height:1.1}
+@keyframes thunk{from{transform:rotate(-6deg) scale(1.8); opacity:0} to{transform:rotate(-6deg) scale(1); opacity:1}}
+.roast{font-size:1.3rem; font-style:italic; max-width:28ch; margin:0}
+.btn{font-family:var(--sans); font-size:.8rem; letter-spacing:.2em; text-transform:uppercase; cursor:pointer; color:var(--paper); background:var(--ink); border:none; border-radius:999px; padding:12px 26px}
+.btn:hover{background:#5a504b}
+.btn:focus-visible{outline:2px dashed var(--tan); outline-offset:3px}
+.heart{position:fixed; pointer-events:none; font-size:16px; animation:float .9s ease-out forwards; z-index:9}
+@keyframes float{to{transform:translate(var(--dx),-70px); opacity:0}}
+
+/* Dancers: screen corners on wide screens, a row under the card on phones */
+.dancers{width:100%; max-width:500px; display:flex; justify-content:space-between; align-items:flex-end; margin-top:18px; pointer-events:none}
+.dancers[hidden]{display:none}
+.fig{height:170px; width:auto; overflow:visible}
+@media (min-width:900px){
+  .dancers{position:fixed; inset:auto 0 0 0; width:auto; max-width:none; margin:0; padding:0 5vw 3vh; z-index:1}
+  .fig{height:min(54vh,34vw,400px)}
+}
+
+/* ===== Finale ===== */
+.finale{display:flex; flex-direction:column; align-items:center}
+.invite{position:relative; width:100%; max-width:440px; background:var(--paper); border:1px solid #ecdcd0; border-radius:6px 6px 0 0; padding:22px 16px 18px; box-shadow:0 14px 30px -20px rgba(58,51,48,.4)}
+.arch{position:relative; padding:18px 8px 0; text-align:center}
+.arch > svg.frame{position:absolute; inset:0; width:100%; height:100%; overflow:visible}
+.arch > *:not(.frame){position:relative}
+.approved{display:inline-block; font-family:var(--sans); font-size:.66rem; letter-spacing:.24em; text-transform:uppercase; color:#3f7d50; background:#e3f1e5; border-radius:999px; padding:4px 12px; margin:0}
+.std{font-family:var(--serif); font-style:italic; font-weight:400; font-size:clamp(2.6rem,11vw,3.3rem); line-height:1; margin:10px 0 6px}
+.couple{font-family:var(--serif); font-weight:500; letter-spacing:.24em; text-transform:uppercase; font-size:1rem; margin:0}
+.rule{display:flex; align-items:center; justify-content:center; gap:10px; margin:14px auto; color:var(--tan)}
+.rule::before,.rule::after{content:""; width:52px; height:1px; background:var(--tan)}
+.rule svg{width:16px; height:16px}
+.date{font-family:var(--sans); font-weight:400; font-size:1.15rem; letter-spacing:.14em; text-transform:uppercase; margin:0}
+.place{font-family:var(--sans); letter-spacing:.3em; text-transform:uppercase; font-size:.8rem; color:var(--muted); margin:6px 0 0}
+.scene{width:100%; margin:16px 0 0; display:block; height:auto}
+.caption{font-family:var(--serif); font-style:italic; color:var(--muted); font-size:1.1rem; margin:6px 0 4px}
+.stub{
+  width:100%; max-width:440px; background:var(--paper); border:1px solid #ecdcd0; border-top:none; border-radius:0 0 6px 6px;
+  position:relative; padding:16px 18px 18px; display:grid; grid-template-columns:repeat(3,1fr); gap:8px; text-align:center;
+  box-shadow:0 14px 30px -20px rgba(58,51,48,.4);
+}
+.stub::before{content:""; position:absolute; top:-1px; left:14px; right:14px; border-top:2px dashed #e2cfc2}
+.stub > div{border-radius:10px; padding:6px 4px}
+.stub > div:nth-child(odd){background:#fdf1f2} .stub > div:nth-child(2){background:#fdf3ec}
+.stub span{display:block; font-family:var(--sans); font-size:.62rem; letter-spacing:.2em; text-transform:uppercase; color:var(--muted)}
+.stub b{font-family:var(--serif); font-weight:600; font-size:1.02rem}
+.follow{font-family:var(--serif); font-style:italic; font-weight:400; font-size:1.9rem; margin:24px 0 0; text-align:center; line-height:1.15}
+.follow small{display:block; font-style:italic; font-size:1.05rem; color:var(--muted)}
+.again{margin-top:20px}
+.credit{position:relative; z-index:2; font-family:var(--sans); font-size:.68rem; letter-spacing:.14em; color:var(--muted); margin:36px 0 0; text-align:center}
+@media (max-width:440px){ .card{padding:40px 28px 34px} .arch{padding-inline:0} }
+@media (prefers-reduced-motion: reduce){.stamp,.heart{animation:none}.heart{display:none}.opt{transition:none}}
+</style>
+</head>
+<body>
+
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <!-- hand-drawn look: wobbly lines + pencil grain inside the fills -->
+  <filter id="paint" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="2" seed="3" result="w"/>
+    <feDisplacementMap in="SourceGraphic" in2="w" scale="2.6" xChannelSelector="R" yChannelSelector="G" result="d"/>
+    <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" seed="8" result="g"/>
+    <feColorMatrix in="g" type="matrix" values="0.24 0 0 0 0.79  0.24 0 0 0 0.79  0.24 0 0 0 0.79  0 0 0 0 1" result="gn"/>
+    <feBlend in="d" in2="gn" mode="multiply" result="b"/>
+    <feComposite in="b" in2="d" operator="in"/>
+  </filter>
+  <filter id="ink2" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="5" result="w"/>
+    <feDisplacementMap in="SourceGraphic" in2="w" scale="1.4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</defs></svg>
+
+<div class="page">
+  <div id="doodles" aria-hidden="true"></div>
+  <svg id="toran" aria-hidden="true"></svg>
+  <header>
+    <svg class="lotus" viewBox="-30 -28 60 32" aria-hidden="true">
+      <g stroke="#fffaf6" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M0 -4 C -2 0 -1 2 0 4" fill="none"/>
+        <path d="M-1 0 C -9 -1 -17 1 -24 -4 C -16 -7 -8 -5 -1 0Z" fill="#fbe7da"/>
+        <path d="M1 0 C 9 -1 17 1 24 -4 C 16 -7 8 -5 1 0Z" fill="#fbe7da"/>
+        <circle cx="0" cy="-13" r="9" fill="#fffaf6" stroke="#b3263a"/>
+        <path d="M-5 -12 C -5 -19 5 -19 5 -12 C 4.5 -8 -2.5 -8 -2.5 -12.5 C -2.2 -15.5 2.4 -15 2 -12" fill="none" stroke="#b3263a"/>
+      </g>
+    </svg>
+    <h1 class="names">Arpit <em>&amp;</em> Tanishka</h1>
+    <p class="sub">Answer correctly to unlock your pass</p>
+  </header>
+  <main id="stage" aria-live="polite"></main>
+  <div class="dancers" id="dancers" aria-hidden="true">
+    <svg class="fig" id="groom" viewBox="10 0 148 250"></svg>
+    <svg class="fig" id="bride" viewBox="44 -6 128 256"></svg>
+  </div>
+</div>
+
+<script>
+/* ===== Edit these ===== */
+const WEDDING = {
+  date: "3 & 4 March 2027",
+  place: "Delhi",
+  caption: "Started in Yosemite… continues in Delhi"
+};
+/* ok:true = correct. A wrong option uses its own `fail` roast if it has one, else the question's.
+   `html` lets an option use simple formatting like <s>strikethrough</s>. */
+const QUESTIONS = [
+  { q:"Will you be coming to our wedding?",
+    opts:[{t:"Yes", ok:true},{t:"Obviously yes", ok:true}] },
+  { q:"Will you cry during the ceremony?",
+    opts:[{t:"Yes", ok:true},{t:"I never cry", ok:false},{t:"No", ok:false}],
+    fail:"Not even a single tear? Who ARE you? Try again please" },
+  { q:"What gift are you bringing to the wedding?",
+    opts:[{t:"Something from the registry", ok:true},{t:"Cash, duh", ok:true},{t:"My presence is the gift", ok:false}],
+    fail:"Presence as gift? At my wedding?! Try again please" },
+  { q:"Will you join an elaborate choreography on songs of our choosing?",
+    opts:[{t:"Yes, with 110% effort", ok:true},{t:"Ummmm sure?", ok:true},
+          {html:"<s>No</s> Yes, purely out of fear of Tanishka's stink eye", ok:true},
+          {t:"No can do", ok:false}],
+    fail:"Phones down, hands up. Rehearsals start soon. Try again please" },
+  { q:"Lastly, the most important question of all: who do you like more?",
+    opts:[{t:"Tanishka", ok:true},
+          {t:"Arpit", ok:false, fail:"Even Arpit picked Tanishka. Try again please"},
+          {t:"Both, equally", ok:false, fail:"Diplomacy is not allowed at this wedding. Pick a side. Try again please"}] }
+];
+/* ====================== */
+
+const f=n=>n.toFixed(1);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const INK="#3a3330", K="#26211f", W="#fffdfb", SKIN="#f3d5c2", HAIR="#3a2f2c";
+/* flat fill printed slightly off-register, thin ink line on top */
+const sh=(d,fill,w=1.1)=>`<path d="${d}" fill="${fill}" transform="translate(1.4 1.2)"/><path d="${d}" fill="none" stroke="${INK}" stroke-width="${w}" stroke-linejoin="round" stroke-linecap="round"/>`;
+const ln=(d,w=1,c=INK)=>`<path d="${d}" fill="none" stroke="${c}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`;
+/* ink drawing helpers for the black-and-white dancers */
+const kf=d=>`<path d="${d}" fill="${K}" stroke="${K}" stroke-width="1" stroke-linejoin="round"/>`;
+const wf=(d,w=1.1)=>`<path d="${d}" fill="${W}" stroke="${K}" stroke-width="${w}" stroke-linejoin="round" stroke-linecap="round"/>`;
+const note=(x,y,s=14)=>`<text x="${x}" y="${y}" font-size="${s}" fill="${K}" font-family="serif">♪</text>`;
+
+/* ---------- dancers, drawn in clean cartoon ink (bold outline, solid blacks, red hearts) ---------- */
+const RED="#d9434f";
+const o=(d,fill=W,w=1.7)=>`<path d="${d}" fill="${fill}" stroke="${K}" stroke-width="${w}" stroke-linejoin="round" stroke-linecap="round"/>`;
+const heartP=(x,y,s,c=RED)=>`<path transform="translate(${x} ${y}) scale(${s})" d="M0 6 C-3 2 -9 -1 -8 -5 C-7 -9 -2 -9 0 -5 C2 -9 7 -9 8 -5 C9 -1 3 2 0 6 Z" fill="none" stroke="${c}" stroke-width="${f(1.8/s)}" stroke-linejoin="round"/>`;
+const tuft=(x,y)=>ln(`M${x} ${y} q-2 -7 -6 -10 M${x+2} ${y} q0 -9 2 -13 M${x+4} ${y} q3 -6 7 -8`,1.1,K);
+const daisy=(x,y,r)=>`${[0,72,144,216,288].map(a=>`<ellipse cx="${x}" cy="${f(y-r*.62)}" rx="${f(r*.36)}" ry="${f(r*.55)}" transform="rotate(${a} ${x} ${y})" fill="${W}" stroke="${K}" stroke-width=".9"/>`).join("")}<circle cx="${x}" cy="${y}" r="${f(r*.3)}" fill="${K}"/>`;
+
+/* groom: side-parted wavy hair with flicks, thick square glasses, open blazer over white shirt + skinny tie,
+   hand in pocket, relaxed weight-shift stance, raising a coupe, canvas sneakers */
+document.getElementById("groom").innerHTML = `<g filter="url(#ink2)">
+  ${tuft(48,240)} ${tuft(118,240)} ${ln("M40 240 h90",1.1,K)}
+  ${ln("M44 240 C44 230 46 222 44 214",1,K)} ${daisy(44,212,6)}
+  <g transform="translate(80 0) scale(1.25 1) translate(-80 0)">
+  ${o("M60 128 L80.6 128 L78.4 229 L64 229 C63 200 61.6 162 60 128 Z",K)}
+  ${o("M79.4 128 L100.4 128 C102.6 160 105 196 108.6 228.6 L94.4 229.4 C91 200 86.6 166 81 140 Z",K)}
+  ${ln("M70 140 C70.6 170 71 200 71.4 226 M92 142 C95 172 98 200 100.6 226",.9,"#6e6866")}
+  ${o("M62.4 226.6 L78.6 226.6 L79.6 235 L80.6 239.6 L53.6 239.6 C52.6 235.6 56.4 232.6 62.4 230.6 Z",K)}
+  ${ln("M53.8 239.6 h27",2.2,K)} ${ln("M57 235.4 q3 -2.2 6.4 -2.4 M70 229.6 l4 2.6",1.1,"#fffdfb")}
+  ${o("M94.6 226.6 L108.6 226.4 C111.4 230.6 117.6 232.6 121.6 234.6 C123.2 236.6 122.6 239.6 120.4 239.6 L94.2 239.6 Z",K)}
+  ${ln("M94 239.6 h27.4",2.2,K)} ${ln("M113 232.6 q3.6 .6 6.4 2.6 M100 229.4 l4 2.6",1.1,"#fffdfb")}
+  ${o("M69.4 70 L90.6 70 L92.6 129 L67.4 129 Z")}
+  ${[84,94,104,114].map(y=>`<circle cx="${y>100?80.4:80.2}" cy="${y}" r=".9" fill="${K}"/>`).join("")}
+  ${o("M67.6 122.6 L92.4 122.6 L92.6 128.4 L67.4 128.4 Z",K,1.2)} ${o("M77.6 123.4 L83 123.4 L83 127.6 L77.6 127.6 Z",W,1)}
+  ${o("M78.4 72.6 L81.6 72.6 L82.6 77 L83.6 106 L80 112 L76.4 106 L77.4 77 Z",K,1.2)}
+  ${o("M60 72 C65 69.4 69 69 71.6 70 L74.6 92 L70.6 133 L57.6 133.6 C56.6 110 56 90 60 72 Z",K)}
+  ${o("M100 72 C95 69.4 91 69 88.4 70 L85.4 92 L89.4 133 L102.4 133.6 C103.4 110 104 90 100 72 Z",K)}
+  ${ln("M71.6 70.6 L74.4 91.6 L70.8 98 M88.4 70.6 L85.6 91.6 L89.2 98 M63 112 h6 M91.6 104 l6 -1",1,"#fffdfb")}
+  ${o("M70.4 69.4 L77.4 77 L80 72 Z M89.6 69.4 L82.6 77 L80 72 Z",W,1.2)}
+  ${o("M60 74 C54 84 52 100 54 118 C55 124.4 60 126.4 63.4 122 C62 108 63 92 66.6 80 Z",K)}
+  ${ln("M56 122 C58 124 61 124 63 121",1,"#fffdfb")}
+  ${o("M100 73.6 C106.4 84 108.6 96 106.4 106.4 L98.4 110 C99.4 100 98.4 90 95.6 80 Z",K)}
+  ${o("M106.4 106.4 C108.6 98 112 92 116 86 L121.6 90 C117.4 98 112.4 104 98.4 110 Z",K)}
+  ${o("M118.8 84.4 L118.8 70",W,1.3)} ${o("M114.6 85.2 C116.4 84 121.2 84 123 85.2 C121.2 86.4 116.4 86.4 114.6 85.2 Z",W,1.2)}
+  ${o("M109.6 66.4 L128 66.4 C126.4 72.4 111.2 72.4 109.6 66.4 Z",W,1.4)}
+  <path d="M111.4 67.8 L126.2 67.8 C124.8 70.4 112.8 70.4 111.4 67.8 Z" fill="#f2c2c8"/>
+  ${o("M115.6 80.4 C115.6 76.6 117.6 75 119.8 75 C122.4 75 124 77 123.6 80.4 C123.2 83.6 121 85 119.4 85 C117.4 85 115.6 83.4 115.6 80.4 Z",W,1.3)}
+  ${ln("M130 60 l3 -4 M134 64 l5 -2 M127 57 l0 -5",1.2,K)}
+  ${o("M74.6 62 L85.4 62 L85.4 71 L74.6 71 Z",W,1.4)}
+  </g>
+  <g transform="rotate(-7 80 64) translate(80 44) scale(1.08 1.02) translate(-80 -44)">
+  ${o("M63 44 C63 30 71 24 80 24 C90 24 97.4 31 97.4 44 C97.4 56 90 64.4 80 64.4 C70 64.4 63 56 63 44 Z")}
+  ${o("M64.4 44.6 C61 43.6 59.4 47 60.4 50 C61.4 53 64 53.6 65.6 52.4 Z",W,1.4)}
+  ${o("M61.4 46 C58.6 36 62 26.6 70 22.6 C76 19.6 86 19 92.6 21.6 C99.6 24.4 102 31 100.6 39 C99.6 35 97 32.4 93.6 31.4 C87.4 33.6 80 33.2 75.6 30.4 C71.6 33.4 67 37.4 64.6 45 Z",K,1.4)}
+  ${ln("M75 21.4 C77.6 25 77 28.6 75.6 30.4",1.3,"#fffdfb")}
+  ${ln("M84 20.6 C88 16 93 15.6 96.4 17.6 M90 20.4 C94 18.6 99 20 101 23 M66 25 C62 22 60 18 61.4 15 M100.4 37 C103.6 37.6 105.6 40 105.6 43 M61 38 C58 38 56 40 56.4 43",1.5,K)}
+  ${ln("M83 25 q5 -1 9 2 M66 33 q2 -4 6 -5",1,"#fffdfb")}
+  <rect x="69.6" y="40" width="10" height="8" rx="1.4" fill="${W}" stroke="${K}" stroke-width="2.2"/>
+  <rect x="83.4" y="40" width="10" height="8" rx="1.4" fill="${W}" stroke="${K}" stroke-width="2.2"/>
+  ${ln("M79.6 43 h3.8 M69.6 42.6 L64.6 43.6",1.6,K)}
+  <ellipse cx="75" cy="44.2" rx="1.7" ry="2.1" fill="${K}"/><ellipse cx="88.8" cy="44.2" rx="1.7" ry="2.1" fill="${K}"/>
+  <circle cx="74.4" cy="43.4" r=".6" fill="${W}"/><circle cx="88.2" cy="43.4" r=".6" fill="${W}"/>
+  ${ln("M70.6 36.4 q4 -2.4 8 -.6 M84.4 35.6 q4 -2 8 .2",1.4,K)}
+  <circle cx="69.6" cy="53.6" r="3" fill="#f3a0a8" opacity=".7"/><circle cx="93.4" cy="53.6" r="3" fill="#f3a0a8" opacity=".7"/>
+  ${ln("M83.4 48.6 q1.6 2.6 -.6 3.6",1.1,K)}
+  ${ln("M76.4 56 q5 4.4 10 0",1.6,K)}
+  </g>
+  ${heartP(36,70,.9)} ${heartP(132,108,.7)}
+</g>`;
+
+/* bride: big curly hair kept flat on the crown with a side part and flicks, open eyes with a glint,
+   sleeveless white midi dress, daisy bouquet at her chest, heels, one foot kicked up behind */
+document.getElementById("bride").innerHTML = `<g filter="url(#ink2)">
+  ${tuft(66,240)} ${tuft(130,240)} ${ln("M56 240 h96",1.1,K)}
+  ${ln("M150 240 C150 230 152 222 150 214",1,K)} ${daisy(150,212,6)}
+  ${o("M71 44 C69 28 79 20 90 20 C101 20 111 28 109.6 44 C112.6 54 112 64 115 74 C118 84 116.6 94 112 101 L104 101 C105 92 103 82 103.6 72 L76.4 72 C77 82 75 92 76 101 L68 101 C63.4 94 62 84 65 74 C68 64 67.4 54 71 44 Z",K,1.4)}
+  ${[[68,46],[65,54],[67,62],[64,70],[66,78],[63,86],[66,94],[70,100],[112,46],[115,54],[113,62],[116,70],[114,78],[117,86],[114,94],[110,100]].map(([x,y],k)=>`<circle cx="${x}" cy="${y}" r="${k%2?4.4:4.8}" fill="${K}"/>`).join("")}
+  ${[[74,28],[82,22],[90,20],[98,21],[106,27]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="4.6" fill="${K}"/>`).join("")}
+  ${ln("M66 52 q3 -2 2 -6 M64.6 68 q3 -2 2 -6 M65 84 q3 -2 2 -6 M114 52 q-3 -2 -2 -6 M115.4 68 q-3 -2 -2 -6 M115 84 q-3 -2 -2 -6 M80 21 q3 -2.4 6 -1.4 M96 19.6 q3 .4 5 3",1.1,"#fffdfb")}
+  ${ln("M68.6 104 q-2 3 0 5 M111.4 104 q2 3 0 5",1.4,K)}
+  ${o("M73.4 198 L81.4 199 L81.4 228.6 L74.4 228.6 Z",W,1.4)}
+  ${o("M73.4 227.4 L82 227.4 L82.6 236 L83 242.6 L80.6 242.6 L80 236.4 L76 236 L72 238 C66 238.8 60.8 238.4 61 236 C64.4 232.4 69 230 73.4 227.4 Z",W,1.5)}
+  ${ln("M72.6 231 L81.8 230.6",1.1,K)}
+  ${o("M120 192 C130 188 140 182 147 174.6 L152.6 180 C145.4 189 135.6 197.6 124 201.6 Z",W,1.4)}
+  ${o("M146 171.4 L150 168 C155 165 160 162 165.4 160.6 C164.6 165 159.6 170 154.4 175.6 L151.4 180 Z",W,1.5)}
+  ${ln("M147.6 171 L141.4 163",1.9,K)} ${ln("M149 175.8 L154.6 171",1.1,K)}
+  ${o("M76 104 C70 130 62 160 54.6 197 C70 203.4 88 205 100 201 C114 207 130 201 145.4 189.6 C132 168 116 134 102 104 Z",W,1.9)}
+  ${ln("M84 108 C80 140 74 170 70 200 M92 108 C92 140 92 172 92 203 M98 108 C106 140 116 168 124 200 M100 106 C114 132 128 160 138 194",1,K)}
+  ${ln("M58 186 C66 192 72 192 80 194 M128 196 C134 194 140 190 144 186",.9,"#8d8682")}
+  ${o("M75.4 102 L102.6 102 L102.6 107 L75.4 107 Z",W,1.5)}
+  ${o("M72 74 C78 70 98 70 104 74 L102.6 103.6 L75.4 103.6 Z",W,1.7)}
+  ${ln("M80 72 C84 76 92 76 96 72",1.2,K)}
+  ${o("M84 64 L92.6 64 L92.6 72.6 L84 72.6 Z",W,1.4)}
+  ${ln("M83 120 L85 98 M88 120 L88 97 M93 120 L91 98 M86 120 l-1 6 M90 120 l1 6",1.1,K)}
+  ${o("M74 74 C68 80 66 92 68 100 C70 104 76.4 102.4 84 96.6 L82 92.4 C78 94.4 74.4 96.4 73.4 94 C72.4 88 74 82 78 76 Z")}
+  ${o("M102 74 C108 80 110 92 108 100 C106 104 99.6 102.4 92 96.6 L94 92.4 C98 94.4 101.6 96.4 102.6 94 C103.6 88 102 82 98 76 Z")}
+  ${leafK2(78,92,10,-60)} ${leafK2(98,92,10,60)} ${leafK2(84,78,9,-25)} ${leafK2(93,77,9,25)}
+  ${daisy(80,86,6.6)} ${daisy(90,80,7.2)} ${daisy(99,87,6.4)} ${daisy(85,74,5.6)} ${daisy(96,72.6,5.2)} ${daisy(89,90,5)}
+  ${[[76,78],[102,79],[90,68],[80,68]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="1.3" fill="${K}"/>`).join("")}
+  ${o("M82 97.6 C82 94.6 85 93.4 88 94 C91 93.4 94 94.6 94 97.6 C94 100 91 100.6 88 100 C85 100.6 82 100 82 97.6 Z",W,1.3)}
+  ${o("M72 46 C72 32 79 27 88 27 C97 27 104 33 104 46 C104 58 97 65.4 88 65.4 C79 65.4 72 58 72 46 Z")}
+  ${o("M70.6 46 C70 32 78 24.6 89 24.6 C99 24.6 106 31 105.4 44 C102.6 38 99 34.4 95 32.6 C90 35.6 82 38 74.6 40 C73 42 71.6 44 70.6 46 Z",K,1.2)}
+  ${ln("M94.6 24.8 C95.6 28 95.6 30.6 95 32.6",1.3,"#fffdfb")}
+  ${ln("M84 28.6 q4 -2 8 -1 M99 29 q3 2 4 6",1,"#fffdfb")}
+  ${ln("M86 22.4 C88 18.6 92 17.6 95 18.6 M100 23.4 C103 21.6 107 22.6 108.4 25.6 M74 29 C70.6 27.4 69.4 24 70.6 21.4",1.4,K)}
+  <ellipse cx="80.4" cy="46.4" rx="2.3" ry="3" fill="${K}"/><ellipse cx="94.6" cy="46.4" rx="2.3" ry="3" fill="${K}"/>
+  <circle cx="79.6" cy="45.2" r=".9" fill="${W}"/><circle cx="93.8" cy="45.2" r=".9" fill="${W}"/>
+  ${ln("M77.6 44.2 l-1.8 -1.2 M97.4 44.2 l1.8 -1.2",1.2,K)}
+  ${ln("M77.2 40 q3 -2.4 6 -1 M91.8 39 q3 -1.4 6 1",1.2,K)}
+  <circle cx="75.6" cy="53" r="3" fill="#f3a0a8" opacity=".7"/><circle cx="100.4" cy="53" r="3" fill="#f3a0a8" opacity=".7"/>
+  ${ln("M87.6 49.4 q-1.6 2.6 .6 3.4",1.1,K)}
+  ${o("M81.6 55.4 C82.6 61.6 92.4 61.6 93.6 55.4 Z",K,1.2)}
+  <path d="M84.6 59.2 C86 61 89.6 61 91 59.2 C89.4 58.2 86.4 58.2 84.6 59.2 Z" fill="#e9707c"/>
+  <circle cx="104.6" cy="51" r="1.6" fill="${W}" stroke="${K}" stroke-width="1"/>
+  ${ln("M112 12 l4 -6 M120 18 l6 -4 M106 8 l1 -7",1.4,K)}
+  ${heartP(150,120,.9)} ${heartP(56,130,.7)}
+</g>`;
+function leafK2(x,y,len,ang){return `<path transform="translate(${x} ${y}) rotate(${ang})" d="M0 0 C${f(len*.32)} ${f(-len*.3)} ${f(len*.32)} ${f(-len*.7)} 0 ${f(-len)} C${f(-len*.32)} ${f(-len*.7)} ${f(-len*.32)} ${f(-len*.3)} 0 0 Z" fill="${K}"/>`}
+
+/* ---------- story doodles: white line drawings of places and moments, scattered around the quiz ---------- */
+const DS="#fffaf6";
+const dl=(d,w=1.8)=>`<path d="${d}" fill="none" stroke="${DS}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`;
+const DOODLES={
+  jagannath:`<svg viewBox="-4 -12 88 92">${dl("M22 66 L58 66 L58 74 L22 74 Z M18 74 L62 74")}${dl("M27 66 C27 40 32 22 40 16 C48 22 53 40 53 66 M33.6 66 C33.6 44 36 30 40 20 M46.4 66 C46.4 44 44 30 40 20 M28 56 C36 54 44 54 52 56 M29.4 44 C36 42 44 42 50.6 44")}<ellipse cx="40" cy="14" rx="7" ry="2.6" fill="none" stroke="${DS}" stroke-width="1.8"/>${dl("M38 11.4 L42 11.4 L41 8 L39 8 Z")}<circle cx="40" cy="4.6" r="3" fill="none" stroke="${DS}" stroke-width="1.6"/>${dl("M40 1.6 V-9",1.4)}<path d="M40 -9 L51 -5.6 L40 -2.4 Z" fill="${RED}"/>${dl("M4 74 L4 58 L22 58 M2 58 L12 46 L22 58 M6 52 L18 52")}</svg>`,
+  crossword:`<svg viewBox="0 0 80 80">${[[0,1],[1,1],[2,1],[3,1],[3,0],[3,2],[3,3],[1,2],[1,3],[0,3],[2,3]].map(([c,r])=>`<rect x="${8+c*15}" y="${8+r*15}" width="15" height="15" fill="none" stroke="${DS}" stroke-width="1.6"/>`).join("")}<rect x="23" y="38" width="15" height="15" fill="${DS}"/>${[["L",0,1],["O",1,1],["V",2,1],["E",3,1],["Y",3,0],["S",3,2],["!",3,3]].map(([t,c,r])=>`<text x="${15.5+c*15}" y="${20+r*15}" font-family="Jost,sans-serif" font-size="10" text-anchor="middle" fill="${DS}">${t}</text>`).join("")}<text x="10" y="31" font-size="4.5" font-family="Jost,sans-serif" fill="${DS}">1</text></svg>`,
+  letters:`<svg viewBox="0 0 84 70">${dl("M22 8 L76 14 L72 48 L18 42 Z M22 8 L46 30 L76 14")}<rect x="6" y="22" width="56" height="36" rx="2" fill="#f6a2b6" stroke="${DS}" stroke-width="1.8"/>${dl("M6 22 L34 42 L62 22")}${[0,1,2,3,4,5,6].map(k=>`<path d="M${8+k*8} 58 l4 -3" stroke="${k%2?DS:RED}" stroke-width="2.2"/>`).join("")}<path d="M34 46 C30 42 27 40 28 37.6 C29 35 32.6 35.4 34 37.6 C35.4 35.4 39 35 40 37.6 C41 40 38 42 34 46 Z" fill="${RED}"/></svg>`,
+  phone:`<svg viewBox="0 0 80 80">${dl("M18 20 C14 26 16 40 28 52 C40 64 54 66 60 62 L64 54 L54 46 L48 52 C42 50 32 40 30 34 L36 28 L28 18 Z")}${dl("M50 16 C58 18 64 24 66 32 M50 8 C62 10 72 20 74 32",1.6)}${dl("M60 62 C62 68 66 70 68 66 C70 62 74 64 72 68 C70 72 74 74 76 70",1.3)}</svg>`,
+  distance:`<svg viewBox="0 0 96 64">${dl("M14 46 C14 38 20 34 24 34 C28 34 34 38 34 46 C34 52 24 60 24 60 C24 60 14 52 14 46 Z")}<circle cx="24" cy="45" r="3" fill="${DS}"/>${dl("M62 46 C62 38 68 34 72 34 C76 34 82 38 82 46 C82 52 72 60 72 60 C72 60 62 52 62 46 Z")}<circle cx="72" cy="45" r="3" fill="${DS}"/><path d="M24 32 C30 8 66 8 72 32" fill="none" stroke="${DS}" stroke-width="1.6" stroke-dasharray="3 4" stroke-linecap="round"/><path transform="translate(48 13) rotate(10)" d="M-8 0 L8 0 M0 0 L-4 -6 M0 0 L-4 6 M-7 0 L-9 -3 M-7 0 L-9 3" fill="none" stroke="${DS}" stroke-width="1.8" stroke-linecap="round"/>${heartP(48,30,.5,RED)}</svg>`,
+  passports:`<svg viewBox="0 0 84 72">${dl("M30 6 L70 10 L66 60 L26 56 Z")}<rect x="10" y="14" width="40" height="52" rx="3" fill="#f6a2b6" stroke="${DS}" stroke-width="1.8"/><circle cx="30" cy="36" r="8" fill="none" stroke="${DS}" stroke-width="1.6"/>${dl("M30 28 V44 M22 36 H38 M24.4 30.4 C28 33 32 33 35.6 30.4 M24.4 41.6 C28 39 32 39 35.6 41.6",1)}<text x="30" y="56" font-family="Jost,sans-serif" font-size="5" letter-spacing="1" text-anchor="middle" fill="${DS}">PASSPORT</text>${dl("M18 20 h24",1)}</svg>`,
+  beach:`<svg viewBox="0 0 88 76"><circle cx="66" cy="16" r="8" fill="none" stroke="${DS}" stroke-width="1.8"/>${dl("M66 3 V0 M79 16 h3 M75 7 l2 -2 M57 7 l-2 -2",1.4)}${dl("M28 64 C30 48 30 36 26 24 M26 24 C18 18 10 20 6 26 M26 24 C22 14 14 10 8 12 M26 24 C30 14 40 12 46 16 M26 24 C36 20 44 24 46 32 M26 24 C26 18 30 12 34 10")}<circle cx="24" cy="28" r="2.2" fill="${DS}"/><circle cx="29" cy="28" r="2.2" fill="${DS}"/>${dl("M4 66 C12 62 20 70 28 66 C36 62 44 70 52 66 C60 62 68 70 76 66 C80 64 84 66 86 68 M14 74 C22 70 30 76 38 73 C46 70 54 76 62 73")}${dl("M58 58 L70 36 M54 40 C62 30 76 32 82 42 Z",1.6)}</svg>`,
+  thailand:`<svg viewBox="0 0 92 72">${dl("M10 40 C12 24 18 10 26 8 C32 8 34 22 34 40 M38 40 C40 30 44 20 50 20 C56 20 58 30 58 40 M62 40 C64 28 70 16 76 16 C82 18 84 30 84 40",1.5)}${dl("M4 50 L76 50 C82 50 86 44 88 36 C84 40 80 42 76 42 L10 42 C6 42 4 46 4 50 Z")}${dl("M88 36 L86 26",1.6)}<path d="M86 26 L82 31 M86 26 L90 31" stroke="${RED}" stroke-width="2" stroke-linecap="round"/>${dl("M28 42 V34 L44 34 V42 M36 34 V30",1.4)}${dl("M2 60 C10 56 18 64 26 60 C34 56 42 64 50 60 C58 56 66 64 74 60 C80 57 86 60 90 62")}</svg>`,
+  bangalore:`<svg viewBox="0 0 88 76">${dl("M4 72 H84 M8 72 V48 H80 V72 M6 48 L44 40 L82 48")}${[14,22,30,58,66,74].map(x=>dl(`M${x} 52 V70`,1.2)).join("")}${dl("M34 48 V32 H54 V48 M38 52 V70 M44 52 V70 M50 52 V70")}${dl("M35 32 C35 18 53 18 53 32 M44 21 V13 M40 13 H48")}<circle cx="44" cy="11" r="1.6" fill="${DS}"/>${dl("M10 48 C10 42 16 42 16 48 M72 48 C72 42 78 42 78 48",1.3)}</svg>`,
+  pizza:`<svg viewBox="0 0 80 80">${dl("M10 16 C30 6 54 6 72 18 L42 74 Z")}${dl("M10 16 C30 6 54 6 72 18 C70 24 64 24 60 22 C46 15 30 15 14 24 C10 22 9 19 10 16 Z")}${[[34,34,5],[50,36,4.4],[42,52,4.2],[28,46,3.2]].map(([x,y,r])=>`<circle cx="${x}" cy="${y}" r="${r}" fill="${RED}"/>`).join("")}${dl("M56 36 C57 42 55 46 57 50 C58 53 56 55 54 53",1.4)}${dl("M20 28 l3 2 M60 28 l-2 3 M46 62 l2 2",1.2)}</svg>`,
+  drinks:`<svg viewBox="0 0 88 80">${dl("M10 16 L36 22 L22 40 Z M22 40 L18 60 M10 62 L26 62")}${dl("M78 16 L52 22 L66 40 Z M66 40 L70 60 M62 62 L78 62")}<circle cx="16" cy="12" r="3.4" fill="${RED}"/>${dl("M16 12 L22 30",1.2)}<path d="M70 10 C72 14 76 14 78 12" stroke="${RED}" stroke-width="2.4" fill="none" stroke-linecap="round"/>${dl("M40 10 l-2 -6 M44 8 V1 M48 10 l2 -6",1.6)}${dl("M38 18 C42 14 46 14 50 18",1.2)}</svg>`,
+  flights:`<svg viewBox="0 0 96 72"><path d="M8 58 C20 66 34 60 34 50 C34 40 22 42 26 50 C30 58 46 50 52 40" fill="none" stroke="${DS}" stroke-width="1.6" stroke-dasharray="3 4" stroke-linecap="round"/><g transform="translate(64 26) rotate(-32)">${dl("M-18 0 C-18 -3 14 -4 18 0 C14 4 -18 3 -18 0 Z M-2 -2 L-10 -16 L-5 -16 L8 -2 M-2 2 L-10 16 L-5 16 L8 2 M-16 -1 L-20 -8 L-17 -8 L-12 -2 M-16 1 L-20 8 L-17 8 L-12 2")}</g><rect x="56" y="48" width="34" height="18" rx="2" fill="#f6a2b6" stroke="${DS}" stroke-width="1.6"/>${dl("M80 48 V66",1.2)}<text x="58.6" y="56" font-family="Jost,sans-serif" font-size="4.6" fill="${DS}">BOARDING</text>${dl("M59 61 h14 M83 54 v8 M86 54 v8",1.2)}</svg>`,
+  jaipur:`<svg viewBox="0 0 84 84">${dl("M8 80 L76 80 L76 50 L68 50 L68 34 L60 34 L60 20 L50 20 L50 10 L34 10 L34 20 L24 20 L24 34 L16 34 L16 50 L8 50 Z")}${[[12,56,8],[22,40,6],[30,26,4],[40,14,2]].map(([x0,y,n])=>Array.from({length:n},(_,k)=>{const x=x0+k*((84-2*x0)/n)+((84-2*x0)/n)/2-3;return `<path d="M${f(x)} ${y+8} V${y+3} C${f(x)} ${y} ${f(x+6)} ${y} ${f(x+6)} ${y+3} V${y+8}" fill="none" stroke="${DS}" stroke-width="1.2"/>`}).join("")).join("")}${[12,22,30,40].map((x,k)=>`${dl(`M${f(x)} ${[50,34,20,10][k]} C${f(x)} ${[44,28,14,4][k]} ${f(x+6)} ${[44,28,14,4][k]} ${f(x+6)} ${[50,34,20,10][k]}`,1.3)}${k<3?dl(`M${f(84-x-6)} ${[50,34,20][k]} C${f(84-x-6)} ${[44,28,14][k]} ${f(84-x)} ${[44,28,14][k]} ${f(84-x)} ${[50,34,20][k]}`,1.3):""}`).join("")}${dl("M10 68 H74",1.2)}</svg>`
+};
+/* wavy hand-drawn border */
+function wavyRect(w,h,pad,amp,wl){
+  const E=[[pad,pad,w-pad,pad],[w-pad,pad,w-pad,h-pad],[w-pad,h-pad,pad,h-pad],[pad,h-pad,pad,pad]], pts=[];
+  E.forEach(([x0,y0,x1,y1])=>{const dx=x1-x0,dy=y1-y0,L=Math.hypot(dx,dy),nx=dy/L,ny=-dx/L,n=Math.max(1,Math.round(L/wl)),S=n*14;
+    for(let s=0;s<S;s++){const t=s/S,o=Math.sin(2*Math.PI*n*t)*amp;pts.push(f(x0+dx*t+nx*o)+" "+f(y0+dy*t+ny*o))}});
+  return "M"+pts.join("L")+"Z";
+}
+function frame(card){
+  const svg=card.querySelector(".wave");
+  const draw=()=>{const w=card.clientWidth,h=card.clientHeight;svg.setAttribute("viewBox",`0 0 ${w} ${h}`);
+    svg.innerHTML=`<path d="${wavyRect(w,h,12,5,44)}" fill="#fffaf6" stroke="${INK}" stroke-width="3" stroke-linejoin="round"/>`};
+  draw(); if(window.ResizeObserver) new ResizeObserver(draw).observe(card);
+}
+
+/* botanical garland: swagged vine, round eucalyptus leaves, little roses */
+function miniRose(x,y,r){return `<circle cx="${f(x)}" cy="${f(y)}" r="${r}" fill="#f8dde1" stroke="#c98b96" stroke-width=".9"/><path d="M${f(x-r*.5)} ${f(y+r*.1)} C${f(x-r*.45)} ${f(y-r*.6)} ${f(x+r*.5)} ${f(y-r*.6)} ${f(x+r*.45)} ${f(y+r*.1)} C${f(x+r*.35)} ${f(y+r*.5)} ${f(x-r*.2)} ${f(y+r*.45)} ${f(x-r*.15)} ${f(y)}" fill="none" stroke="#c98b96" stroke-width=".8"/>`}
+function drawToran(){
+  const el=document.getElementById("toran"), Wd=el.clientWidth||innerWidth, seg=Wd<520?110:150, n=Math.ceil(Wd/seg)+1;
+  let p=`M0 8`, leaves="", roses="";
+  for(let i=0;i<n;i++){const x0=i*seg, cx=x0+seg/2; p+=` Q ${f(cx)} 36 ${f(x0+seg)} 8`;
+    for(let k=1;k<12;k++){const t=k/12, x=(1-t)**2*x0+2*(1-t)*t*cx+t*t*(x0+seg), y=(1-t)**2*8+2*(1-t)*t*36+t*t*8,
+      tx=2*(1-t)*(cx-x0)+2*t*(x0+seg-cx), ty=2*(1-t)*28+2*t*(-28), ang=Math.atan2(ty,tx)*180/Math.PI, side=k%2?1:-1;
+      leaves+=`<ellipse cx="0" cy="${-5*side}" rx="3.2" ry="4.6" transform="translate(${f(x)} ${f(y)}) rotate(${f(ang+side*25)})" fill="${["#fffaf6","#fde3e9","#fffaf6"][k%3]}" stroke="#c4566b" stroke-width=".8"/>`}
+    roses+=miniRose(x0,9,5)+miniRose(cx,22,3.6);
+  }
+  el.innerHTML=`<path d="${p}" fill="none" stroke="#fffaf6" stroke-width="1.3"/>`+leaves+roses;
+}
+
+/* ---------- Yosemite proposal scene ---------- */
+function sceneSVG(){
+  const cliffs="M0 104 C18 88 30 60 56 52 C76 46 90 62 102 78 C114 70 126 72 138 82 C158 54 194 34 234 38 C262 42 284 62 300 84 L300 116 L0 116 Z";
+  let pines=""; for(let x=-4;x<306;x+=6){const h=6+((x*13)%17),w=2.5+h*.18;pines+=`<path d="M${x} 116 L${f(x+w)} ${116-h} L${f(x+2*w)} 116 Z" fill="${(x/6)%3?"#bcd6c2":"#a3c4ad"}"/>`}
+  const SNK="#f29c7e";
+  return `<svg class="scene" viewBox="0 0 300 200" role="img" aria-label="Illustration of the proposal at Mirror Lake, Yosemite">
+  <defs><clipPath id="water"><rect x="0" y="116" width="300" height="44"/></clipPath></defs>
+  <g filter="url(#paint)">
+  <path d="M0 96 C40 70 70 66 100 72 C150 50 220 44 300 70 L300 116 L0 116Z" fill="#f1eef0"/>
+  <path d="${cliffs}" fill="#e3e0e8" transform="translate(1.5 1.2)"/>
+  ${ln(cliffs.replace(" L300 116 L0 116 Z",""),.9)}
+  ${ln("M60 62 C62 74 60 88 64 100 M190 46 C186 62 190 80 186 100 M222 44 C224 60 220 78 224 98",.7,"#c6c0d0")}
+  ${pines}
+  <rect x="0" y="116" width="300" height="44" fill="#d9e9f0"/>
+  <g clip-path="url(#water)" opacity=".5"><g transform="translate(0 232) scale(1 -1)"><path d="${cliffs}" fill="#e3e0e8"/>${pines}</g></g>
+  ${ln("M24 128 h26 M180 134 h34 M98 142 h20 M240 124 h18",.9,"#ffffff")}
+  ${sh("M196 150 L250 146 L251 151 L197 155 Z","#e2d0bd",.8)}
+  <path d="M-10 161 C60 155 120 159 170 157 C220 155 260 159 310 157 L310 210 L-10 210 Z" fill="#efe7dc"/>${ln("M-10 160 C60 154 120 158 170 156 C220 154 260 158 310 156",.9)}
+
+  <!-- her: white beanie, short wavy hair, glasses, peach scarf, sleeveless pink top -->
+  ${sh("M114 178 C114 182 124 182 125 179 L123 176 Z","#fbf8f4",.8)} ${sh("M127 178 C127 182 137 182 138 179 L136 176 Z","#fbf8f4",.8)}
+  ${sh("M115 132 L115 177 L123 177 L126 148 L128 177 L136 177 L137 132 Z","#5b5562",.9)}
+  ${sh("M115.5 86 C109 92 113.5 97 109 102 C108 107.5 113 110.5 117.5 108.5 C115.5 103 119.5 98 118.5 91 Z",HAIR,.8)}
+  ${sh("M114 94 C114 86 120 82 126 82 C132 82 136 87 135 95 C134 103 130 107 125 107 C119 107 114 102 114 94 Z",SKIN)}
+  ${sh("M133 88 C136.5 93 133 98 136.5 103 L133.5 104.5 C131 99 133.5 94 130.8 89.5 Z",HAIR,.7)}
+  <circle cx="128.5" cy="100" r="2.2" fill="#f0a3ae" opacity=".55"/>
+  <circle cx="129.6" cy="95.2" r="3" fill="none" stroke="${INK}" stroke-width="1.1"/> ${ln("M126.6 94.8 L121 93.6",.8)}
+  ${ln("M127.6 95.5 q1.8 -1.5 3.6 0",.9)} ${ln("M127.4 90.4 q2 -1.2 4 0",.8,HAIR)} ${ln("M133.6 96.4 l1.2 2.3 -1.2 .5",.7)}
+  <path d="M128.6 101.8 q2.4 2.4 4.6 0 q-2.3 .8 -4.6 0Z" fill="#dc8392" stroke="${INK}" stroke-width=".55"/>
+  ${sh("M112 92 C111 80 118 74 125 74 C133 74 138 80 137 91 C130 86 119 86 112 92 Z","#fbf8f4")}
+  ${ln("M113 89 C120 85 130 85 137 88",.7)} <circle cx="125" cy="72" r="3" fill="#fbf8f4" stroke="${INK}" stroke-width=".8"/>
+  ${sh("M135.6 113.4 L154.2 123.8 L152.2 128.4 L134.2 119.4 Z",SKIN,.9)}
+  ${sh("M113.5 110 C112 120 111.5 130 113 136 L139 136 C140.5 128 140 118 136.5 110 C130 112 120 112 113.5 110 Z","#ec9fb3")}
+  ${sh("M113.4 112.4 L110.4 139 L114.6 139.4 L117.4 115.6 Z",SKIN,.9)}
+  <circle cx="112.4" cy="141" r="2.5" fill="${SKIN}" stroke="${INK}" stroke-width=".8"/>
+  ${sh("M116 106 C121 110 129 110 134 106 L135 112 C129 116 121 116 115 112 Z","#f3b48f",.9)}
+  ${sh("M126 113 L130 113 L132 140 L127 140 Z","#f3b48f",.9)}
+  <circle cx="154.5" cy="125.5" r="2.6" fill="${SKIN}" stroke="${INK}" stroke-width=".8"/>
+
+  <!-- him: kneeling, pink shirt, thick square glasses, pinkish-orange sneakers -->
+  ${sh("M165 147 L187 149 L192 168 L204 169 L204 177 L183 178 L178 162 L170 158 L159 157 L159 177 L151 177 L150 156 L152 149 Z","#b9c8de")}
+  ${ln("M165 150 L178 162",.7,"#8d9cb4")}
+  ${sh("M147 176 C146 181 160 182 163 178 L161 175 Z",SNK,.8)} ${ln("M148 179.6 h12",.8,"#fff")}
+  ${sh("M203 167 L211 169 L211 178 L203 178 Z",SNK,.8)}
+  ${sh("M164 120 C160 132 162 146 166 152 L188 152 C188 140 182 128 176 120 Z","#f2a7bd")}
+  ${sh("M166 123 C161 126 158 126 156 126 L157 131 C161 131 165 130 168 129 Z","#f2a7bd",.9)}
+  ${sh("M160 112 C159 104 164 99 170 99 C176 99 180 104 179 111 C178 118 174 122 169 122 C164 122 161 118 160 112 Z",SKIN)}
+  ${sh("M159 109 C158 99 166 95 172 96 C178 97 181 102 180 108 C176 104 166 103 159 109 Z",HAIR,.8)}
+  <circle cx="168" cy="116.6" r="2.1" fill="#f0a3ae" opacity=".55"/>
+  <circle cx="163.6" cy="112" r=".9" fill="${INK}"/>
+  <rect x="160.4" y="109.4" width="6.4" height="5.2" rx=".8" fill="none" stroke="${INK}" stroke-width="1.6"/> ${ln("M166.8 111.4 L171 110.8",1.1)}
+  ${ln("M161.2 107.6 q2 -1.2 4 0",.8,HAIR)} ${ln("M160.4 114.6 l-1.2 2 1.2 .5",.7)}
+  <path d="M161 118.8 q2 2 4 .2 q-2 .7 -4 -.2Z" fill="#d97c86" stroke="${INK}" stroke-width=".5"/>
+  <path d="M146 92 c-2.4 -3.2 -7 -1 -4.4 2.8 L146 100 l4.4 -4.6 c2.6 -3.8 -2 -6 -4.4 -2.8Z" fill="#e8a0ae"/>
+  <path d="M136 84 l1.4 3 3 1.4 -3 1.4 -1.4 3 -1.4 -3 -3 -1.4 3 -1.4Z M160 86 l1 2 2 1 -2 1 -1 2 -1 -2 -2 -1 2 -1Z" fill="#e2b48f"/>
+  </g></svg>`;
+}
+const FLOWER=`<svg viewBox="-8 -8 16 16" aria-hidden="true">${miniRose(0,0,6.5)}</svg>`;
+
+/* ---------- quiz ---------- */
+const stage=document.getElementById("stage"), dancers=document.getElementById("dancers"); let i=0;
+
+function renderQ(){
+  const item=QUESTIONS[i]; dancers.hidden=false; document.body.classList.remove("final");
+  stage.innerHTML=`<div class="card"><svg class="wave" aria-hidden="true"></svg><div class="inner">
+    <div class="top"><p class="qnum">Question ${i+1} of ${QUESTIONS.length}</p>
+      <div class="dots" aria-hidden="true">${QUESTIONS.map((_,k)=>`<i class="${k<i?"on":""}"></i>`).join("")}</div></div>
+    <h2 class="q">${esc(item.q)}</h2>
+    <div class="opts">${item.opts.map((o,k)=>`<button class="opt" id="opt-${i}-${k}" data-k="${k}">${o.html||esc(o.t)}</button>`).join("")}</div>
+  </div></div>`;
+  frame(stage.querySelector(".card"));
+  stage.querySelectorAll(".opt").forEach(b=>b.addEventListener("click",()=>pick(+b.dataset.k,b)));
+}
+
+function hearts(btn){
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const r=btn.getBoundingClientRect(), cols=["#e8a0ae","#f2bf9f","#c45f72","#f2bf9f","#e8a0ae"];
+  for(let k=0;k<5;k++){const h=document.createElement("span");h.className="heart";h.textContent="♥";h.style.color=cols[k];
+    h.style.left=(r.right-40-k*14)+"px";h.style.top=r.top+"px";h.style.setProperty("--dx",(k*8-16)+"px");h.style.animationDelay=(k*60)+"ms";
+    document.body.appendChild(h);setTimeout(()=>h.remove(),1300)}
+}
+
+function pick(k,btn){
+  const item=QUESTIONS[i], o=item.opts[k];
+  if(o.ok){
+    btn.classList.add("right"); hearts(btn);
+    stage.querySelectorAll(".opt").forEach(b=>b.disabled=true);
+    setTimeout(()=>{i++; i<QUESTIONS.length?renderQ():renderFinal()},650);
+  }else{
+    const over=document.createElement("div"); over.className="revoked";
+    over.innerHTML=`<div class="stamp"><small>Guest pass</small><b>Revoked</b></div>
+      <p class="roast">${esc(o.fail||item.fail||"Wrong answer. Try again please")}</p>
+      <button class="btn" id="retry">Try again</button>`;
+    stage.querySelector(".card").appendChild(over);
+    const r=over.querySelector("#retry"); r.focus(); r.addEventListener("click",()=>over.remove());
+  }
+}
+
+function renderFinal(){
+  dancers.hidden=true; document.body.classList.add("final");
+  stage.innerHTML=`<div class="finale">
+    <article class="invite">
+      <div class="arch">
+        <p class="approved">Guest pass approved</p>
+        <h2 class="std">Save the date</h2>
+        <p class="couple">Arpit &amp; Tanishka</p>
+        <div class="rule">${FLOWER}</div>
+        <p class="date">${esc(WEDDING.date)}</p>
+        <p class="place">${esc(WEDDING.place)}</p>
+        ${sceneSVG()}
+        <p class="caption">${esc(WEDDING.caption)}</p>
+      </div>
+    </article>
+    <div class="stub">
+      <div><span>Admit</span><b>One good guest</b></div>
+      <div><span>Section</span><b>Dance floor</b></div>
+      <div><span>Seat</span><b>None. Dance.</b></div>
+    </div>
+    <p class="follow">Formal invite to follow<small>Keep the date free, no excuses.</small></p>
+    <button class="btn again" id="again">Take the quiz again</button>
+  </div>`;
+  document.getElementById("again").addEventListener("click",()=>{i=0;renderQ();scrollTo({top:0})});
+}
+
+function drawDoodles(){
+  /* [name, left%, top%, rotation, show on phones?] — kept in the side margins, clear of the card and the dancers */
+  const spots=[["jagannath",5,9,0,1],["distance",17,6,-6],["flights",27,15,-4],["crossword",8,27,-8],["passports",21,27,8],["phone",6,42,6],["pizza",24,42,-10],
+               ["jaipur",94,9,0,1],["letters",82,6,6],["bangalore",73,16,0],["beach",92,27,4],["thailand",79,29,-5],["drinks",93,43,6]];
+  document.getElementById("doodles").innerHTML=spots.map(([n,l,t,r,m])=>DOODLES[n].replace("<svg ",`<svg class="${m?"m":""}" style="left:${l}%;top:${t}%;transform:translateX(-50%) rotate(${r}deg)" `)).join("");
+}
+drawDoodles(); drawToran(); renderQ();
+addEventListener("resize",drawToran);
+</script>
+
+</body>
+</html>
